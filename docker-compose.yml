@@ -1,0 +1,29 @@
+version: '2.0'
+services:
+    web:
+        build: ./web
+        restart: always
+        networks:
+            - front
+    api:
+        build: ./api
+        restart: always
+        networks:
+            - front
+            - back
+    db:
+        build: ./db
+        restart: always
+        networks:
+            - back
+    proxy:
+        build: ./proxy
+        restart: always
+        networks: 
+            - front
+
+networks:
+    front:
+        driver: bridge
+    back:
+        driver: bridge
