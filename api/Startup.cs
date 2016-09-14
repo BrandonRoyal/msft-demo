@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using api.Models;
+using api.Providers;
+using api.Repositories;
 
 namespace api
 {
@@ -17,7 +20,6 @@ namespace api
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -29,6 +31,12 @@ namespace api
         {
             // Add framework services.
             services.AddMvc();
+
+            var redis = new RedisDbContext();
+            services.AddSingleton<IDbContext>(redis);
+
+            services.AddSingleton<IUserRepository>(new UserRepository(redis));
+            services.AddSingleton<IToDoRepository>(new ToDoRepository(redis));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

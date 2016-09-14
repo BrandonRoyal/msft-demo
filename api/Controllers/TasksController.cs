@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using api.Models;
 using api.Providers;
 
 namespace api.Controllers
@@ -10,47 +9,50 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class TasksController : Controller
     {
-        private IDataAccess _dataAccess;
 
-        public TasksController(){
-            _dataAccess = new DataAccess();
-        }
+        private IDbContext _context;
 
-        public TasksController(IDataAccess dataAccess)
+        public TasksController()
         {
-            _dataAccess = dataAccess;
+            _context = new RedisDbContext();
         }
 
         // GET api/tasks
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] {"1", "2"};
         }
 
         // GET api/tasks/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(string id)
         {
-            return "value";
+            //Convert.ToString(id)
+            return _context.Get(id);
         }
 
         // POST api/tasks
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpPost("{id}")]
+        public void Post(string id, [FromBody]ToDo value)
         {
+            var objStr = JsonConvert.SerializeObject(value);
+            _context.Set(id, objStr);
         }
 
         // PUT api/tasks/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(string id, [FromBody]ToDo value)
         {
+            var objStr = JsonConvert.SerializeObject(value);            
+            _context.Set(id, objStr);
         }
 
         // DELETE api/tasks/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            _context.Delete(id);
         }
     }
 }
