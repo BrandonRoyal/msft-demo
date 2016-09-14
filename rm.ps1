@@ -1,4 +1,9 @@
-docker rm -f demo_redis
-docker rm -f demo_web
-docker rm -f demo_api
-docker rm -f demo_proxy
+docker stop redis
+docker stop web
+docker stop api
+docker stop nginx
+
+docker rm -f redis
+docker rm -f web
+docker rm -f api
+docker rm -f nginx
