@@ -1,4 +1,4 @@
-docker rm demo_redis
-docker rm demo_web
-docker rm demo_api
-docker rm demo_proxy
+docker rm -f demo_redis
+docker rm -f demo_web
+docker rm -f demo_api
+docker rm -f demo_proxy
