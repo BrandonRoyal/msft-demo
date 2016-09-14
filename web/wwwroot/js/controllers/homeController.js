@@ -6,11 +6,17 @@ app.controller('homeController', ['$scope', '$rootScope','$cookies', 'apiService
 
     $scope.register = function(){
         console.log($scope.username)
-        $cookies.put('demo_user', $scope.username);
-        $rootScope.username = $scope.username;
-        $('#myModal').modal('toggle');
-        $scope.getData();
+        
+        apiService.post('/api/user/' + $scope.username, {}, function(err, result){
+            if (!err){
+                $cookies.put('demo_user', $scope.username);
+                $rootScope.username = $scope.username;
+                $('#myModal').modal('toggle');
+                $scope.getData();
+            }
+        });
     }
+    //commentss
 
     $scope.getData = function(){
         if (!$scope.username) return;
@@ -19,6 +25,9 @@ app.controller('homeController', ['$scope', '$rootScope','$cookies', 'apiService
             if (!err){
                 $scope.user = result;
                 return;
+            }
+            if (err.status = 404){
+                $('#myModal').modal('toggle');
             }
             console.error(err);
         });

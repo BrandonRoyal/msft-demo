@@ -1,3 +1,6 @@
+using System;
+using System.Net;
+using System.Threading.Tasks;
 using StackExchange.Redis;
 
 namespace api.Providers
@@ -9,8 +12,16 @@ namespace api.Providers
 
         public RedisDbContext()
         {
-            _redis = ConnectionMultiplexer.Connect("127.0.0.1");
+            var task = GetHostEntry();
+            var hostEntry = task.Result;
+            if (hostEntry == null || hostEntry.AddressList.Length <= 0) throw new Exception("cannot resolve host entry from hostname 'redis'");
+            var ip = hostEntry.AddressList[0].ToString();
+            _redis = ConnectionMultiplexer.Connect(ip);
             _db = _redis.GetDatabase();
+        }
+
+        public async Task<IPHostEntry> GetHostEntry(){
+            return await Dns.GetHostEntryAsync("redis");
         }
 
         public string Get(string key)
