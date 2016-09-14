@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:1.0-windowsservercore-core
+FROM microsoft/dotnet:1.0.0-preview2-windowsservercore-sdk
 
 COPY ./project.json /app/project.json
 
