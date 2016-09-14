@@ -1,17 +1,57 @@
 <div ng-controller="homeController">
     <div class="row">
         <div class="col-md-6">
-             <h1>Tasks</h1>
+            <h1>Tasks</h1>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-default pull-right" style="margin-top:30px;" ng-click="addEmptyTask()">
+            <button class="btn btn-default pull-right" style="margin-top:30px;" ng-click="stageEmptyToDo()">
                 <i class="glyphicon glyphicon-plus"></i>
             </button>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><i class="glyphicon glyphicon-ok"></i></th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="t in user.toDos">
+                        <td><input type="checkbox" ng-model="t.complete" ng-click="updateToDo(t)"/></td>
+                        <td><input type="text" class="form-control" ng-model="t.text" ng-blur="updateToDo(t)"/></td>
+                        <td><a href="" class="pull-right" ng-click="removeToDo(t)"><i class="glyphicon glyphicon-trash"></i></a></td>
+                    </tr>
+                    <tr ng-show="newToDo">
+                        <td></td>
+                        <td><input type="text" class="form-control" ng-model="newToDo.text" ng-blur="commitNewToDo()"/></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Create Username</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="registrationForm">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="username" class="form-control" id="username" placeholder="Username" ng-model="username" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="register()" ng-disabled="!registrationForm.$valid">Register</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
