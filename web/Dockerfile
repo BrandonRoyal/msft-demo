@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:1.0-nanoserver-core
+FROM microsoft/dotnet:1.0-windowsservercore-core
 
 COPY ./project.json /app/project.json
 
