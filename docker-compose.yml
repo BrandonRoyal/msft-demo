@@ -14,12 +14,12 @@ services:
         links:
             - redis
     redis:
-        image: microsoft/sample-redis
+        image: microsoft/sample-redis:windowsservercore-10.0.14300.1030
         restart: always
         networks:
             - back
     proxy:
-        image: microsoft/sample-nginx
+        image: microsoft/sample-nginx:windowsservercore-10.0.14300.1030
         restart: always
         networks: 
             - front
