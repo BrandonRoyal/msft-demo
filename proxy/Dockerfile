@@ -10,8 +10,7 @@ RUN powershell -Command \
 
 COPY ./nginx.conf /tmp/nginx.conf
 
-# RUN powershell -Command \
-#     Copy-Item c:\tmp\nginx.conf c:\nginx-1.9.13\conf\ -force
+RUN copy c:\tmp\nginx.conf c:\nginx-1.9.13\conf\ /Y
 
 WORKDIR /nginx-1.9.13
 
