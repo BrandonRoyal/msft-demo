@@ -8,7 +8,7 @@ RUN powershell -Command \
     Expand-Archive -Path c:\nginx-1.9.13.zip -DestinationPath c:\ ; \
     Remove-Item c:\nginx-1.9.13.zip -Force
 
-COPY ./nginx.conf /nginx-1.9.13/conf/nginx.conf
+COPY ./nginx.conf C:\nginx-1.9.13\conf\nginx.conf
 
 WORKDIR /nginx-1.9.13
 
