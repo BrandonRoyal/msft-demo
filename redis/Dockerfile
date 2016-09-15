@@ -8,6 +8,8 @@ RUN powershell -Command \
     Expand-Archive -Path c:\redis.zip -DestinationPath c:\redis ; \
     Remove-Item c:\redis.zip -Force
 
+COPY ./redis.conf /redis/redis.conf
+
 WORKDIR /redis
 
-CMD redis-server.exe
+CMD redis-server.exe redis.conf
