@@ -30,7 +30,7 @@ namespace api.Providers
         }
 
         public async Task<IPHostEntry> GetHostEntry(){
-            return await Dns.GetHostEntryAsync("redis2");
+            return await Dns.GetHostEntryAsync("redis");
         }
 
         public string Get(string key)
