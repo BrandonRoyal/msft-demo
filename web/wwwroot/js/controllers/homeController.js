@@ -73,7 +73,7 @@ app.controller('homeController', ['$scope', '$rootScope','$cookies', 'apiService
     $scope.removeToDo = function(todo){
         if (!$scope.username) return;
 
-        apiService.put('/api/todo/' + $scope.username, todo, function(err, result){
+        apiService.delete('/api/todo/' + $scope.username, todo, function(err, result){
             if (!err){
                 var index = $scope.user.toDos.indexOf(todo);
                 $scope.user.toDos.splice(index, 1);
