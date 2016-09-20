@@ -2,31 +2,16 @@ version: '2.0'
 services:
     web:
         build: ./web
-        networks:
-            - front
     api:
         build: ./api
-        networks:
-            - front
-            - back
         links:
             - redis
     redis:
         image: brandonroyal/demo_redis:latest
-        networks:
-            - back
     nginx:
         image: brandonroyal/demo_nginx:latest
-        networks: 
-            - front
         links:
             - web
             - api
         ports:
             - "80:80"
-
-networks:
-    front:
-        driver: nat
-    back:
-        driver: nat
