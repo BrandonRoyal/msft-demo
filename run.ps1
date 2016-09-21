@@ -5,7 +5,7 @@ Write-Host "redis_ip: $redis_ip"
 Write-Host "------"
 
 Write-Host "running demo_web"
-docker run --name web --network default -p 5000:80 -d brandonroyal/demo_web:latest
+docker run --name web --network default -d brandonroyal/demo_web:latest
 $web_ip = docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" web
 Write-Host "web_ip: $web_ip"
 Write-Host "------"
