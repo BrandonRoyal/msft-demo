@@ -1,5 +1,7 @@
 FROM microsoft/windowsservercore
 
-COPY ./../utils/get-default-gateway.ps1 /get-default-gateway.ps1
+COPY . /app
+
+WORKDIR /app
 
 CMD start.ps1
