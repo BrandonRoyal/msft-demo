@@ -12,7 +12,7 @@ Write-Host "------"
 
 Write-Host "running demo_api"
 docker run --name api --network default -d brandonroyal/demo_api:latest powershell ./start.ps1 $redis_ip
-$api_ip = docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" web
+$api_ip = docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" api
 Write-Host "api_ip: $api_ip"
 Write-Host "------"
 
