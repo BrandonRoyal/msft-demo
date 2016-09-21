@@ -7,9 +7,8 @@ Param (
     [string]$ApiIp
 )
 
-#ipconfig | Select-String 'Default Gateway' | ForEach-Object { $gateway = $_.Line.Substring(39) }
 Add-HostEntry web $WebIp
 Add-HostEntry api $ApiIp
-ping web
-ping api
+ping -n 1 web
+ping -n 1 api
 ./nginx.exe

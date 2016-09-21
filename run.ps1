@@ -16,6 +16,6 @@ $api_ip = docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" api
 Write-Host "api_ip: $api_ip"
 Write-Host "------"
 
-Write-Host "skipping demo_nginx"
+Write-Host "running demo_nginx"
 docker run --name nginx --network default -p 80:80 -d brandonroyal/demo_nginx:latest powershell ./start.ps1 $web_ip $api_ip
 Write-Host "------"
