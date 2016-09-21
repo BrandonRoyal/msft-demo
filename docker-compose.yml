@@ -1,24 +1,23 @@
 version: '2.0'
 services:
     web:
-        build: ./web
+        image: brandonroyal/demo_web:latest
         networks:
-            - front
+            - default
     api:
-        build: ./api
+        image: brandonroyal/demo_web:latest
         networks:
-            - front
-            - back
+            - default
         links:
             - redis
     redis:
         image: brandonroyal/demo_redis:latest
         networks:
-            - back
+            - default
     nginx:
         image: brandonroyal/demo_nginx:latest
         networks: 
-            - front
+            - default
         links:
             - web
             - api
@@ -26,7 +25,6 @@ services:
             - "80:80"
 
 networks:
-    front:
-        driver: nat
-    back:
-        driver: nat
+    default:
+        external:
+            name: nat
