@@ -12,15 +12,8 @@ namespace api.Providers
 
         public RedisDbContext()
         {
-            var task = GetHostEntry();
-            var ip = string.Empty;
-            try
-            {
-                var hostEntry = task.Result;
-                if (hostEntry == null || hostEntry.AddressList.Length <= 0) throw new Exception("cannot resolve host entry from hostname 'redis'");
-                ip = hostEntry.AddressList[0].ToString();
-            }
-            catch(Exception e)
+            var ip = Environment.GetEnvironmentVariable("REDIS_IP");
+            if (string.IsNullOrEmpty(ip))
             {
                 ip = "127.0.0.1";
             }
