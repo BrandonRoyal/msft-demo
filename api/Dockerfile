@@ -11,5 +11,3 @@ COPY . /app
 RUN ["dotnet", "build"]
 
 EXPOSE 5000/tcp
-
-CMD powershell ./start.ps1
