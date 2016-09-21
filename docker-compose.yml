@@ -5,7 +5,7 @@ services:
         networks:
             - default
     api:
-        image: brandonroyal/demo_web:latest
+        image: brandonroyal/demo_api:latest
         networks:
             - default
         links:
