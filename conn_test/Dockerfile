@@ -4,4 +4,4 @@ COPY . /app
 
 WORKDIR /app
 
-CMD ./start.ps1
+CMD powershell ./start.ps1
