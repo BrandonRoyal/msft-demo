@@ -4,4 +4,4 @@ COPY . /app
 
 WORKDIR /app
 
-CMD start.ps1
+CMD ./start.ps1
