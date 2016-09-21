@@ -1,2 +1,2 @@
-$dg = ./get-default-gateway.ps1
-ping -t $dg
+ipconfig | Select-String 'Default Gateway' | ForEach-Object { $gateway = $_.Line.Substring(39) }
+ping -t $gateway
