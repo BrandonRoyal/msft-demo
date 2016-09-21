@@ -9,7 +9,7 @@ RUN powershell -Command \
     Remove-Item c:\nginx-1.9.13.zip -Force
 
 RUN powershell -Command \
-    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force \
+    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force ; \
     Install-Module PsHosts -Force
 
 COPY ./nginx.windows.conf /nginx-1.9.13/conf/nginx.conf
