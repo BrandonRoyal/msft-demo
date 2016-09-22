@@ -17,7 +17,7 @@ namespace api.Providers
             {
                 var task = GetHostEntry();
                 var hostEntry = task.Result;
-                ip = hostEntry.ToString();
+                ip = hostEntry.AddressList[0].ToString();
             }
             
             _redis = ConnectionMultiplexer.Connect(ip);
