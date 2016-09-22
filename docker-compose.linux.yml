@@ -3,14 +3,14 @@ services:
     web:
         build:
             context: ./web
-            dockerfile: ./debug/Dockerfile
+            dockerfile: ./linux/Dockerfile
         restart: always
         networks:
             - front
     api:
         build:
             context: ./api
-            dockerfile: ./debug/Dockerfile
+            dockerfile: ./linux/Dockerfile
         restart: always
         networks:
             - front
