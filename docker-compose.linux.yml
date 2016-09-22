@@ -22,7 +22,7 @@ services:
         restart: always
         networks:
             - back
-    proxy:
+    nginx:
         image: nginx:latest
         restart: always
         networks: 
@@ -31,7 +31,7 @@ services:
             - web
             - api
         volumes:
-            - "./proxy/nginx.conf:/etc/nginx/nginx.conf"
+            - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
         ports:
             - "80:80"
 

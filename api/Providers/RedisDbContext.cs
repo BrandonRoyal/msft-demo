@@ -15,7 +15,9 @@ namespace api.Providers
             var ip = Environment.GetEnvironmentVariable("REDIS_IP");
             if (string.IsNullOrEmpty(ip))
             {
-                ip = "127.0.0.1";
+                var task = GetHostEntry();
+                var hostEntry = task.Result;
+                ip = hostEntry.ToString();
             }
             
             _redis = ConnectionMultiplexer.Connect(ip);

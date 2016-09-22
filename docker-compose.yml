@@ -1,22 +1,47 @@
 version: '2.0'
 services:
     web:
-        image: brandonroyal/demo_web:latest
+        build:
+            context: ./web
+            dockerfile: ./linux/Dockerfile
+        networks:
+            - front
+        volumes:
+            - ./web/bin:/app/bin
+            - ./web/Views:/app/Views
+            - ./web/wwwroot:/app/wwwroot
+
     api:
-        image: brandonroyal/demo_api:latest
+        build:
+            context: ./api
+            dockerfile: ./linux/Dockerfile
+        networks:
+            - front
+            - back
         links:
             - redis
+        volumes:
+            - ./api/bin:/app/bin
+
     redis:
-        image: brandonroyal/demo_redis:latest
+        image: redis:latest
+        networks:
+            - back
+
     nginx:
-        image: brandonroyal/demo_nginx:latest
+        image: nginx:latest
+        networks: 
+            - front
         links:
             - web
             - api
+        volumes:
+            - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
         ports:
             - "80:80"
 
 networks:
-    default:
-        external:
-            name: nat
+    front:
+        driver: bridge
+    back:
+        driver: bridge
